@@ -1,4 +1,4 @@
-package com.eventhub.event.enums;
+package com.EventZen.event.enums;
 
 public enum EventStatus {
     DRAFT,

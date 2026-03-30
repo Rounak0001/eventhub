@@ -1,4 +1,4 @@
-package com.eventhub.auth.dto;
+package com.EventZen.auth.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -21,6 +21,6 @@ public class RegisterRequest {
     @Size(min = 6, message = "Password must be at least 6 characters")
     private String password;
 
-    private String phone;
-    private String city;
+    // private String phone;
+    // private String city;
 }

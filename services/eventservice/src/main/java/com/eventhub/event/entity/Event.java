@@ -1,8 +1,8 @@
-package com.eventhub.event.entity;
+package com.EventZen.event.entity;
 
-import com.eventhub.event.enums.EventStatus;
-import com.eventhub.event.enums.TicketType;
-import com.eventhub.event.enums.VisibilityType;
+import com.EventZen.event.enums.EventStatus;
+import com.EventZen.event.enums.TicketType;
+import com.EventZen.event.enums.VisibilityType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

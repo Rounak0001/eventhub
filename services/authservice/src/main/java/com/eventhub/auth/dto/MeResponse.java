@@ -1,6 +1,6 @@
-package com.eventhub.auth.dto;
+package com.EventZen.auth.dto;
 
-import com.eventhub.auth.enums.UserRole;
+import com.EventZen.auth.enums.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -11,7 +11,7 @@ public class MeResponse {
     private String name;
     private String email;
     private UserRole role;
-    private String phone;
-    private String city;
+    // private String phone;
+    // private String city;
     private Boolean isActive;
 }

@@ -1,23 +1,18 @@
-package com.eventhub.auth.controller;
+package com.EventZen.auth.controller;
 
-import com.eventhub.auth.dto.AdminLoginRequest;
-import com.eventhub.auth.dto.AuthResponse;
-import com.eventhub.auth.dto.LoginRequest;
-import com.eventhub.auth.dto.MeResponse;
-import com.eventhub.auth.dto.RegisterRequest;
-import com.eventhub.auth.service.AuthService;
+import com.EventZen.auth.dto.AdminLoginRequest;
+import com.EventZen.auth.dto.AuthResponse;
+import com.EventZen.auth.dto.LoginRequest;
+import com.EventZen.auth.dto.MeResponse;
+import com.EventZen.auth.dto.RegisterRequest;
+import com.EventZen.auth.service.AuthService;
+import com.EventZen.auth.service.JwtService;
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.security.Keys;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-
-import javax.crypto.SecretKey;
-import java.nio.charset.StandardCharsets;
 
 @RestController
 @RequestMapping("/auth")
@@ -25,9 +20,7 @@ import java.nio.charset.StandardCharsets;
 public class AuthController {
 
     private final AuthService authService;
-
-    @Value("${JWT_SECRET}")
-    private String secret;
+    private final JwtService jwtService;
 
     @PostMapping("/register")
     public AuthResponse register(@Valid @RequestBody RegisterRequest request) {
@@ -51,14 +44,9 @@ public class AuthController {
         }
 
         String token = authHeader.substring(7);
-        SecretKey key = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
 
         try {
-            Claims claims = Jwts.parser()
-                    .verifyWith(key)
-                    .build()
-                    .parseSignedClaims(token)
-                    .getPayload();
+            Claims claims = jwtService.parseToken(token);
 
             Long userId = Long.parseLong(String.valueOf(claims.get("userId")));
             return authService.me(userId);

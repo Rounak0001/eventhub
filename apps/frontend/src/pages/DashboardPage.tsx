@@ -3,11 +3,23 @@ import { CalendarRange, CreditCard, Ticket } from 'lucide-react'
 import { bookingService } from '../api/services/bookings'
 import { eventService } from '../api/services/events'
 import { showcaseEvents } from '../data/content'
+import { useSession } from '../providers/SessionProvider'
 import { formatCurrency, formatDate } from '../utils/format'
 
 export function DashboardPage() {
-  const eventsQuery = useQuery({ queryKey: ['events'], queryFn: eventService.list })
-  const bookingsQuery = useQuery({ queryKey: ['registrations', 'mine'], queryFn: bookingService.listMine })
+  const { user } = useSession()
+
+  const eventsQuery = useQuery({
+    queryKey: ['events', 'organizer', user?.id],
+    queryFn: () => eventService.listByOrganizer(user!.id),
+    enabled: Boolean(user?.id),
+  })
+
+  const bookingsQuery = useQuery({
+    queryKey: ['registrations', 'user', user?.id],
+    queryFn: () => bookingService.listByUser(user!.id),
+    enabled: Boolean(user?.id),
+  })
 
   const events = eventsQuery.data?.length ? eventsQuery.data : showcaseEvents
   const bookings = bookingsQuery.data ?? []
@@ -18,10 +30,10 @@ export function DashboardPage() {
       <div className="mb-8 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
         <div>
           <span className="eyebrow">Dashboard</span>
-          <h1 className="section-title">Hosts can monitor event pipeline, registrations, and payment value without leaving the product surface.</h1>
+          <h1 className="section-title">Keep an eye on your upcoming events, guest activity, and booking momentum.</h1>
         </div>
         <p className="max-w-2xl text-sm leading-7 text-[color:var(--color-muted)]">
-          This dashboard is now aligned to the eventual user-service, event-service, registration-service, and demo payment-service responses.
+          Your dashboard brings together key details so you can stay organized and respond quickly as plans come together.
         </p>
       </div>
 
@@ -50,7 +62,7 @@ export function DashboardPage() {
                     <p className="text-xs uppercase tracking-[0.24em] text-[color:var(--color-gold-deep)]">{event.eventType}</p>
                     <h3 className="mt-2 font-display text-2xl">{event.title}</h3>
                     <p className="mt-2 text-sm text-[color:var(--color-muted)]">
-                      {formatDate(event.date)} · {event.venueName ?? event.city} · {event.visibility ?? 'PUBLIC'}
+                      {formatDate(event.date)} - {event.venueName ?? event.city} - {event.visibility ?? 'PUBLIC'}
                     </p>
                   </div>
                   <div className="rounded-full bg-[color:rgba(185,146,71,0.12)] px-4 py-2 text-sm text-[color:var(--color-gold-deep)]">
@@ -68,16 +80,16 @@ export function DashboardPage() {
             {bookings.length ? (
               bookings.map((booking) => (
                 <div key={booking.id} className="rounded-[1.5rem] bg-white/70 p-5">
-                  <p className="font-display text-xl">{booking.guestName}</p>
-                  <p className="mt-2 text-sm text-[color:var(--color-muted)]">{booking.guestEmail}</p>
+                  <p className="font-display text-xl">{booking.attendeeName}</p>
+                  <p className="mt-2 text-sm text-[color:var(--color-muted)]">{booking.attendeeEmail}</p>
                   <p className="mt-4 text-sm text-[color:var(--color-muted)]">
-                    {booking.seats} seats · {booking.status ?? 'PENDING'} · {booking.paymentStatus ?? 'NOT_REQUIRED'}
+                    {booking.quantity} seats - {booking.status ?? 'PENDING'} - {booking.paymentStatus ?? 'PENDING'}
                   </p>
                 </div>
               ))
             ) : (
               <div className="rounded-[1.5rem] bg-white/70 p-5 text-sm leading-7 text-[color:var(--color-muted)]">
-                No live registrations yet. Once registration-service is wired, confirmed and pending flows will show here.
+                No guest registrations yet. Once attendees begin signing up, you will see them here automatically.
               </div>
             )}
           </div>

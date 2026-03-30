@@ -1,12 +1,12 @@
-package com.eventhub.catalog.controller;
+package com.EventZen.catalog.controller;
 
-import com.eventhub.catalog.dto.EventOptionsResponse;
-import com.eventhub.catalog.entity.City;
-import com.eventhub.catalog.entity.DecorationVendor;
-import com.eventhub.catalog.entity.EventType;
-import com.eventhub.catalog.entity.FoodVendor;
-import com.eventhub.catalog.entity.Venue;
-import com.eventhub.catalog.service.CatalogService;
+import com.EventZen.catalog.dto.EventOptionsResponse;
+import com.EventZen.catalog.entity.City;
+import com.EventZen.catalog.entity.DecorationVendor;
+import com.EventZen.catalog.entity.EventType;
+import com.EventZen.catalog.entity.FoodVendor;
+import com.EventZen.catalog.entity.Venue;
+import com.EventZen.catalog.service.CatalogService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,8 +35,7 @@ public class CatalogController {
     @GetMapping("/venues")
     public List<Venue> getVenues(
             @RequestParam Long cityId,
-            @RequestParam Long eventTypeId
-    ) {
+            @RequestParam Long eventTypeId) {
         return catalogService.getVenues(cityId, eventTypeId);
     }
 
@@ -44,8 +43,7 @@ public class CatalogController {
     public List<DecorationVendor> getDecorationVendors(
             @RequestParam Long cityId,
             @RequestParam Long eventTypeId,
-            @RequestParam(required = false) String tier
-    ) {
+            @RequestParam(required = false) String tier) {
         return catalogService.getDecorationVendors(cityId, eventTypeId, tier);
     }
 
@@ -53,8 +51,7 @@ public class CatalogController {
     public List<FoodVendor> getFoodVendors(
             @RequestParam Long cityId,
             @RequestParam Long eventTypeId,
-            @RequestParam(required = false) String tier
-    ) {
+            @RequestParam(required = false) String tier) {
         return catalogService.getFoodVendors(cityId, eventTypeId, tier);
     }
 
@@ -62,8 +59,7 @@ public class CatalogController {
     public EventOptionsResponse getEventOptions(
             @RequestParam Long cityId,
             @RequestParam Long eventTypeId,
-            @RequestParam(required = false) String tier
-    ) {
+            @RequestParam(required = false) String tier) {
         return catalogService.getEventOptions(cityId, eventTypeId, tier);
     }
 }

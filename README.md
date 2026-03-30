@@ -1,4 +1,4 @@
-# EventHub Starter Monorepo
+# EventZen Starter Monorepo
 
 Production-oriented MVP scaffold for a full-stack event management platform.
 

@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS eventhub_db;
-USE eventhub_db;
+CREATE DATABASE IF NOT EXISTS EventZen_db;
+USE EventZen_db;
 
 CREATE TABLE IF NOT EXISTS users (
   id BIGINT PRIMARY KEY AUTO_INCREMENT,
@@ -155,20 +155,18 @@ CREATE TABLE IF NOT EXISTS food_vendor_availability (
 );
 
 CREATE TABLE IF NOT EXISTS registrations (
-  id BIGINT PRIMARY KEY AUTO_INCREMENT,
-  event_id BIGINT NOT NULL,
-  participant_user_id BIGINT,
-  participant_name VARCHAR(120) NOT NULL,
-  participant_email VARCHAR(190) NOT NULL,
-  participant_phone VARCHAR(30),
-  seats_reserved INT NOT NULL DEFAULT 1,
-  registration_status ENUM('PENDING','CONFIRMED','CANCELLED','REFUNDED') NOT NULL DEFAULT 'PENDING',
-  amount_paid DECIMAL(12,2) NOT NULL DEFAULT 0,
-  payment_status ENUM('NOT_REQUIRED','PENDING','PAID','FAILED','REFUNDED') NOT NULL DEFAULT 'NOT_REQUIRED',
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  CONSTRAINT fk_reg_event FOREIGN KEY (event_id) REFERENCES events(id),
-  CONSTRAINT fk_reg_user FOREIGN KEY (participant_user_id) REFERENCES users(id)
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    event_id BIGINT NOT NULL,
+    user_id BIGINT NOT NULL,
+    attendee_name VARCHAR(150) NOT NULL,
+    attendee_email VARCHAR(150) NOT NULL,
+    attendee_phone VARCHAR(20),
+    quantity INT NOT NULL DEFAULT 1,
+    registration_status VARCHAR(20) NOT NULL DEFAULT 'CONFIRMED',
+    payment_status VARCHAR(20) NOT NULL DEFAULT 'PENDING',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE KEY uk_event_user (event_id, user_id)
 );
 
 CREATE TABLE IF NOT EXISTS payments (

@@ -6,9 +6,9 @@ spring:
     name: catalog-service
 
   datasource:
-    url: jdbc:mysql://localhost:3307/eventhub_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
-    username: eventhub_user
-    password: eventhub_pass
+    url: jdbc:mysql://localhost:3307/EventZen_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: EventZen_user
+    password: EventZen_pass
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:

@@ -10,10 +10,10 @@ export function InvitationCard({ event }: { event: EventSummary }) {
           <div className="absolute inset-x-0 top-0 h-28 bg-[radial-gradient(circle_at_top,rgba(255,212,224,0.55),transparent_70%)]" />
           <p className="text-xs uppercase tracking-[0.42em] text-[#eed4d9]">Event invite</p>
           <div className="relative z-10 mt-10">
-            <p className="text-base text-[#dfe5ec]">Hosted on EventHub</p>
+            <p className="text-base text-[#dfe5ec]">Hosted on EventZen</p>
             <h2 className="mt-10 font-display text-5xl leading-tight text-[#fff8f5] sm:text-6xl">{event.title}</h2>
             <p className="mt-8 max-w-md text-base leading-8 text-[#dfe5ec]">
-              Join this {event.eventType.toLowerCase()} experience with managed registrations, seat limits, and a polished guest journey.
+              Join this {(event.eventType ?? 'special').toLowerCase()} experience with managed registrations, seat limits, and a polished guest journey.
             </p>
           </div>
           <div className="mt-10 flex items-center gap-3 text-[#eed4d9]">

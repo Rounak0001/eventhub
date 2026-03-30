@@ -1,4 +1,4 @@
-package com.eventhub.event.dto;
+package com.EventZen.event.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;

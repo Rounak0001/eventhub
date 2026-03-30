@@ -1,17 +1,18 @@
-package com.eventhub.auth.service;
+package com.EventZen.auth.service;
 
-import com.eventhub.auth.dto.AdminLoginRequest;
-import com.eventhub.auth.dto.AuthResponse;
-import com.eventhub.auth.dto.LoginRequest;
-import com.eventhub.auth.dto.MeResponse;
-import com.eventhub.auth.dto.RegisterRequest;
-import com.eventhub.auth.entity.User;
-import com.eventhub.auth.enums.UserRole;
-import com.eventhub.auth.repository.UserRepository;
+import com.EventZen.auth.dto.AdminLoginRequest;
+import com.EventZen.auth.dto.AuthResponse;
+import com.EventZen.auth.dto.LoginRequest;
+import com.EventZen.auth.dto.MeResponse;
+import com.EventZen.auth.dto.RegisterRequest;
+import com.EventZen.auth.entity.User;
+import com.EventZen.auth.enums.UserRole;
+import com.EventZen.auth.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 @Service
@@ -22,14 +23,14 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
 
+    @Transactional
     public AuthResponse register(RegisterRequest request) {
         String normalizedEmail = request.getEmail().toLowerCase().trim();
 
-        if (normalizedEmail.endsWith("@eventhub.com")) {
+        if (normalizedEmail.endsWith("@EventZen.com")) {
             throw new ResponseStatusException(
                     HttpStatus.FORBIDDEN,
-                    "Registration with company email domain is not allowed"
-            );
+                    "Registration with company email domain is not allowed");
         }
 
         if (userRepository.existsByEmail(normalizedEmail)) {
@@ -41,8 +42,8 @@ public class AuthService {
         user.setEmail(normalizedEmail);
         user.setPasswordHash(passwordEncoder.encode(request.getPassword()));
         user.setRole(UserRole.CUSTOMER);
-        user.setPhone(request.getPhone());
-        user.setCity(request.getCity());
+        // user.setPhone(request.getPhone() != null ? request.getPhone().trim() : null);
+        // user.setCity(request.getCity() != null ? request.getCity().trim() : null);
         user.setIsActive(true);
 
         User savedUser = userRepository.save(user);
@@ -53,8 +54,7 @@ public class AuthService {
                 savedUser.getId(),
                 savedUser.getName(),
                 savedUser.getEmail(),
-                savedUser.getRole()
-        );
+                savedUser.getRole());
     }
 
     public AuthResponse login(LoginRequest request) {
@@ -82,8 +82,7 @@ public class AuthService {
                 user.getId(),
                 user.getName(),
                 user.getEmail(),
-                user.getRole()
-        );
+                user.getRole());
     }
 
     public AuthResponse adminLogin(AdminLoginRequest request) {
@@ -111,8 +110,7 @@ public class AuthService {
                 user.getId(),
                 user.getName(),
                 user.getEmail(),
-                user.getRole()
-        );
+                user.getRole());
     }
 
     public MeResponse me(Long userId) {
@@ -124,9 +122,8 @@ public class AuthService {
                 user.getName(),
                 user.getEmail(),
                 user.getRole(),
-                user.getPhone(),
-                user.getCity(),
-                user.getIsActive()
-        );
+                // user.getPhone(),
+                // user.getCity(),
+                user.getIsActive());
     }
 }

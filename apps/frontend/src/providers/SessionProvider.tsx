@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo, useState, type PropsWithChildren } from 'react'
+import { createContext, useContext, useEffect, useMemo, useState, type PropsWithChildren } from 'react'
 import { getStoredToken, setStoredToken } from '../api/client'
 import type { UserProfile } from '../types/domain'
 
@@ -12,9 +12,40 @@ interface SessionContextValue {
 
 const SessionContext = createContext<SessionContextValue | undefined>(undefined)
 
+const USER_STORAGE_KEY = 'EventZen_user'
+
+function getStoredUser(): UserProfile | null {
+  try {
+    const raw = localStorage.getItem(USER_STORAGE_KEY)
+    return raw ? (JSON.parse(raw) as UserProfile) : null
+  } catch {
+    return null
+  }
+}
+
+function setStoredUser(user: UserProfile | null) {
+  if (!user) {
+    localStorage.removeItem(USER_STORAGE_KEY)
+    return
+  }
+
+  localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(user))
+}
+
 export function SessionProvider({ children }: PropsWithChildren) {
   const [token, setToken] = useState<string | null>(() => getStoredToken())
-  const [user, setUser] = useState<UserProfile | null>(null)
+  const [user, setUserState] = useState<UserProfile | null>(() => getStoredUser())
+
+  const setUser = (nextUser: UserProfile | null) => {
+    setUserState(nextUser)
+    setStoredUser(nextUser)
+  }
+
+  useEffect(() => {
+    if (!token) {
+      setUser(null)
+    }
+  }, [token])
 
   const value = useMemo(
     () => ({

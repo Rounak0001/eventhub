@@ -1,4 +1,4 @@
-package com.eventhub.admin.controller;
+package com.EventZen.admin.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,7 +12,6 @@ public class HealthController {
     public Map<String, String> health() {
         return Map.of(
                 "status", "ok",
-                "service", "admin-service"
-        );
+                "service", "admin-service");
     }
 }

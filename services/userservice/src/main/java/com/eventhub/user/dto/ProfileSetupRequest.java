@@ -1,4 +1,4 @@
-package com.eventhub.user.dto;
+package com.EventZen.user.dto;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -13,5 +13,4 @@ public class ProfileSetupRequest {
 
     private String bio;
     private String address;
-    private String preferredEventType;
 }

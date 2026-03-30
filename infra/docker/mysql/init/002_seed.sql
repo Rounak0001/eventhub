@@ -1,4 +1,4 @@
-USE eventhub_db;
+USE EventZen_db;
 
 INSERT INTO cities (name) VALUES ('Kolkata'),('Mumbai'),('Bangalore')
 ON DUPLICATE KEY UPDATE name=VALUES(name);
@@ -7,8 +7,8 @@ INSERT INTO event_types (name) VALUES ('Wedding'),('Party'),('Concert')
 ON DUPLICATE KEY UPDATE name=VALUES(name);
 
 INSERT INTO users (name,email,password_hash,role,city) VALUES
-('Admin User','admin@eventhub.dev','$2a$10$placeholder','ADMIN','Kolkata'),
-('Demo Organizer','organizer@eventhub.dev','$2a$10$placeholder','CUSTOMER','Mumbai')
+('Admin User','admin@EventZen.dev','$2a$10$placeholder','ADMIN','Kolkata'),
+('Demo Organizer','organizer@EventZen.dev','$2a$10$placeholder','CUSTOMER','Mumbai')
 ON DUPLICATE KEY UPDATE email=VALUES(email);
 
 -- Venues: 3 per city x event type

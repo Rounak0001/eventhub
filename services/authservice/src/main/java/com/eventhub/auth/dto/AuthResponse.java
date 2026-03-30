@@ -1,6 +1,6 @@
-package com.eventhub.auth.dto;
+package com.EventZen.auth.dto;
 
-import com.eventhub.auth.enums.UserRole;
+import com.EventZen.auth.enums.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

@@ -6,7 +6,7 @@ export function PublicShell() {
     <div className="wedding-page">
       <header className="top-strip">
         <div className="top-strip__left">
-          <span><Mail size={14} /> info.eventzen@gmail.com</span>
+          <span><Mail size={14} /> info.EventZen@gmail.com</span>
           <span><Phone size={14} /> +1 971-295-3811</span>
         </div>
         <div className="top-strip__right">
@@ -31,7 +31,8 @@ export function PublicShell() {
 
       <nav className="main-nav">
         <NavLink to="/">Home</NavLink>
-        <NavLink to="/auth">Auth</NavLink>
+        <NavLink to="/login">Login</NavLink>
+        <NavLink to="/signup">Sign Up</NavLink>
         <NavLink to="/dashboard">Dashboard</NavLink>
         <NavLink to="/create">Create Event</NavLink>
         <NavLink to="/events">Events</NavLink>

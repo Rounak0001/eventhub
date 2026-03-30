@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const TOKEN_KEY = 'eventzen_jwt'
+const TOKEN_KEY = 'EventZen_jwt'
 
 export const getStoredToken = () => localStorage.getItem(TOKEN_KEY)
 
@@ -14,7 +14,7 @@ export const setStoredToken = (token: string | null) => {
 }
 
 export const apiClient = axios.create({
-  baseURL: '/api',
+  baseURL: import.meta.env.VITE_API_BASE_URL ?? '/api',
   headers: {
     'Content-Type': 'application/json',
   },

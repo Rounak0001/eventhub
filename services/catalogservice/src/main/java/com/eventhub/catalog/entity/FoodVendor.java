@@ -1,6 +1,6 @@
-package com.eventhub.catalog.entity;
+package com.EventZen.catalog.entity;
 
-import com.eventhub.catalog.enums.VendorTier;
+import com.EventZen.catalog.enums.VendorTier;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

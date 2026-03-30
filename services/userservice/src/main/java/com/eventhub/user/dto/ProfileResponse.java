@@ -1,6 +1,6 @@
-package com.eventhub.user.dto;
+package com.EventZen.user.dto;
 
-import com.eventhub.user.enums.UserRole;
+import com.EventZen.user.enums.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -19,5 +19,4 @@ public class ProfileResponse {
 
     private String bio;
     private String address;
-    private String preferredEventType;
 }

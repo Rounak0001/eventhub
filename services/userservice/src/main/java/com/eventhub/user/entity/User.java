@@ -1,6 +1,6 @@
-package com.eventhub.user.entity;
+package com.EventZen.user.entity;
 
-import com.eventhub.user.enums.UserRole;
+import com.EventZen.user.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

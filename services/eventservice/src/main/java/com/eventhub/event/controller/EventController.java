@@ -1,10 +1,10 @@
-package com.eventhub.event.controller;
+package com.EventZen.event.controller;
 
-import com.eventhub.event.dto.CancelEventRequest;
-import com.eventhub.event.dto.CreateEventRequest;
-import com.eventhub.event.dto.EventResponse;
-import com.eventhub.event.dto.RescheduleEventRequest;
-import com.eventhub.event.service.EventService;
+import com.EventZen.event.dto.CancelEventRequest;
+import com.EventZen.event.dto.CreateEventRequest;
+import com.EventZen.event.dto.EventResponse;
+import com.EventZen.event.dto.RescheduleEventRequest;
+import com.EventZen.event.service.EventService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

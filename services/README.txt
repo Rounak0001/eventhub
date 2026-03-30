@@ -13,7 +13,7 @@ admin-service: 9008
 Default DB config in every application.yml:
 host=localhost
 port=3306
-database=eventhub_db
+database=EventZen_db
 username=root
 password=root
 

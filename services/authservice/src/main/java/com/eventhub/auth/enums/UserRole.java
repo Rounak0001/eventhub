@@ -1,4 +1,4 @@
- package com.eventhub.auth.enums;
+package com.EventZen.auth.enums;
 
 public enum UserRole {
     CUSTOMER,

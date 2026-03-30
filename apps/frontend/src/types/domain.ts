@@ -1,26 +1,46 @@
-export type City = 'Kolkata' | 'Mumbai' | 'Bangalore'
-export type EventType = 'WEDDING' | 'PARTY' | 'CONCERT'
+export type EntityId = number | string
+
+export type UserRole = 'CUSTOMER' | 'ADMIN'
 export type VendorType = 'FOOD' | 'DECORATION'
 export type VendorTier = 'STANDARD' | 'PREMIUM' | 'PLUS'
 export type EventVisibility = 'PUBLIC' | 'PRIVATE'
 export type TicketType = 'FREE' | 'PAID'
 export type EventStatus = 'DRAFT' | 'CONFIRMED' | 'CANCELLED' | 'RESCHEDULED' | 'COMPLETED'
 
+export interface City {
+  id: number
+  name: string
+}
+
+export interface EventType {
+  id: number
+  name: string
+}
+
 export interface UserProfile {
-  id: string
-  fullName: string
+  id: number
+  name: string
   email: string
   phone?: string
-  role?: 'USER' | 'ADMIN'
-  city?: City
+  role?: UserRole
+  city?: string
   avatarUrl?: string
+  bio?: string
+  address?: string
+  isActive?: boolean
 }
 
 export interface EventSummary {
-  id: string
+  id: EntityId
+  organizerId?: number
+  cityId?: number
+  eventTypeId?: number
+  venueId?: number
+  decorationVendorId?: number
+  foodVendorId?: number
   title: string
-  eventType: EventType
-  city: City
+  eventType?: string
+  city?: string
   date: string
   startTime?: string
   endTime?: string
@@ -41,64 +61,77 @@ export interface EventSummary {
 }
 
 export interface EventDetails extends EventSummary {
-  venueId?: string
-  foodVendorId?: string
-  decorationVendorId?: string
+  accessCode?: string
   venueCost?: number
   foodCost?: number
   decorationCost?: number
+  platformFee?: number
   totalCost?: number
-  accessCode?: string
 }
 
 export interface Venue {
-  id: string
+  id: EntityId
   name: string
-  city: City
-  eventType?: EventType
+  cityId?: number
+  eventTypeId?: number
+  city?: string
+  eventType?: string
   image?: string
   capacity?: number
+  basePrice?: number
   startingPrice?: number
   style?: string
   address?: string
+  description?: string
+  status?: string
 }
 
 export interface Vendor {
-  id: string
+  id: EntityId
   name: string
   type: VendorType
   tier: VendorTier
-  city?: City
-  eventType?: EventType
+  cityId?: number
+  eventTypeId?: number
+  city?: string
+  eventType?: string
   description?: string
+  price?: number
   priceFrom?: number
   image?: string
+  status?: string
 }
 
 export interface Registration {
-  id: string
-  eventId: string
-  eventTitle?: string
-  guestName: string
-  guestEmail: string
-  seats: number
+  id: EntityId
+  eventId: EntityId
+  userId?: number
+  attendeeName: string
+  attendeeEmail: string
+  attendeePhone?: string
+  quantity: number
+  seats?: number
   amount?: number
   status?: 'PENDING' | 'CONFIRMED' | 'FAILED' | 'CANCELLED'
-  paymentStatus?: 'NOT_REQUIRED' | 'PENDING' | 'SUCCESS' | 'FAILED' | 'REFUNDED'
+  paymentStatus?: 'PENDING' | 'SUCCESS' | 'FAILED' | 'NOT_REQUIRED'
+  createdAt?: string
 }
 
-export interface PaymentPayload {
-  registrationId?: string
-  eventId?: string
+export interface PaymentRecord {
+  id: number
+  registrationId: number
+  payerUserId?: number
   amount: number
-  currency: string
-  paymentMethod: string
-  simulatedStatus?: 'SUCCESS' | 'FAILED' | 'PENDING'
+  status: string
+  provider?: string
+  paymentType?: string
+  paidAt?: string
+  createdAt?: string
 }
 
-export interface AdminAnalytics {
+export interface AdminDashboard {
+  totalUsers: number
   totalEvents: number
-  activeBookings: number
-  revenue: number
-  occupancyRate: number
+  totalRegistrations: number
+  totalRevenue: number
 }

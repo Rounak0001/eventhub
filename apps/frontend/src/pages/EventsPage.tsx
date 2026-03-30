@@ -1,16 +1,9 @@
-import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
-import { eventService } from '../api/services/events'
 import { showcaseEvents } from '../data/content'
 import { formatCurrency, formatDate } from '../utils/format'
 
 export function EventsPage() {
-  const eventsQuery = useQuery({
-    queryKey: ['events', 'discover'],
-    queryFn: eventService.list,
-  })
-
-  const events = eventsQuery.data?.length ? eventsQuery.data : showcaseEvents
+  const events = showcaseEvents
 
   return (
     <section className="section-shell py-10">

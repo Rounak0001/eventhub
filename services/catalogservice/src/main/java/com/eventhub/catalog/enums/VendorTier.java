@@ -1,4 +1,4 @@
-package com.eventhub.catalog.enums;
+package com.EventZen.catalog.enums;
 
 public enum VendorTier {
     Basic,

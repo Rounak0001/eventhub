@@ -1,6 +1,6 @@
-package com.eventhub.user.repository;
+package com.EventZen.user.repository;
 
-import com.eventhub.user.entity.UserProfile;
+import com.EventZen.user.entity.UserProfile;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

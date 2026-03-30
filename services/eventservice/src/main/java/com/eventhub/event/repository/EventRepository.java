@@ -1,6 +1,6 @@
-package com.eventhub.event.repository;
+package com.EventZen.event.repository;
 
-import com.eventhub.event.entity.Event;
+import com.EventZen.event.entity.Event;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

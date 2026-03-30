@@ -1,4 +1,4 @@
-# EventHub Frontend
+# EventZen Frontend
 
 Updated frontend baseline derived from the uploaded design ZIP and reshaped for the actual product scope:
 

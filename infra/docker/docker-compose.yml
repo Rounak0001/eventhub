@@ -2,13 +2,13 @@ version: '3.9'
 services:
   mysql:
     image: mysql:8.0
-    container_name: eventhub-mysql
+    container_name: EventZen-mysql
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: eventhub_db
-      MYSQL_USER: eventhub_user
-      MYSQL_PASSWORD: eventhub_pass
+      MYSQL_DATABASE: EventZen_db
+      MYSQL_USER: EventZen_user
+      MYSQL_PASSWORD: EventZen_pass
     ports:
       - "3307:3306"
     volumes:

@@ -1,8 +1,8 @@
-package com.eventhub.event.dto;
+package com.EventZen.event.dto;
 
-import com.eventhub.event.enums.EventStatus;
-import com.eventhub.event.enums.TicketType;
-import com.eventhub.event.enums.VisibilityType;
+import com.EventZen.event.enums.EventStatus;
+import com.EventZen.event.enums.TicketType;
+import com.EventZen.event.enums.VisibilityType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

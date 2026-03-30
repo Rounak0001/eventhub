@@ -1,6 +1,6 @@
-package com.eventhub.catalog.repository;
+package com.EventZen.catalog.repository;
 
-import com.eventhub.catalog.entity.Venue;
+import com.EventZen.catalog.entity.Venue;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

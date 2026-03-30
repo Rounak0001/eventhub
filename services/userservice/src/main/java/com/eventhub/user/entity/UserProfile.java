@@ -1,4 +1,4 @@
-package com.eventhub.user.entity;
+package com.EventZen.user.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -22,15 +22,9 @@ public class UserProfile {
     @Column(columnDefinition = "TEXT")
     private String bio;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(length = 255)
     private String address;
 
-    @Column(name = "preferred_event_type", length = 100)
-    private String preferredEventType;
-
-    @Column(name = "created_at", insertable = false, updatable = false)
     private LocalDateTime createdAt;
-
-    @Column(name = "updated_at", insertable = false, updatable = false)
     private LocalDateTime updatedAt;
 }

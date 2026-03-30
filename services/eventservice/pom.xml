@@ -10,11 +10,11 @@
         <relativePath/>
     </parent>
 
-    <groupId>com.eventhub</groupId>
+    <groupId>com.EventZen</groupId>
     <artifactId>event-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>event-service</name>
-    <description>EventHub Event Service</description>
+    <description>EventZen Event Service</description>
 
     <properties>
         <java.version>17</java.version>

@@ -1,4 +1,4 @@
-package com.eventhub.auth.config;
+package com.EventZen.auth.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

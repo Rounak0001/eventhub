@@ -1,6 +1,6 @@
-package com.eventhub.user.repository;
+package com.EventZen.user.repository;
 
-import com.eventhub.user.entity.User;
+import com.EventZen.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User, Long> {

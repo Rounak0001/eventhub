@@ -12,22 +12,22 @@ export function HeroSection() {
           className="paper-panel floral-corner flex flex-col justify-between px-6 py-8 sm:px-8 sm:py-10"
         >
           <div>
-            <span className="eyebrow">Event Management Platform</span>
+            <span className="eyebrow">Celebrate Beautifully</span>
             <h1 className="display-title max-w-2xl">
-              Build, price, publish, and manage events through one responsive control surface.
+              Plan memorable events with venues, vendors, and guest experiences all in one place.
             </h1>
             <p className="mt-5 max-w-xl text-sm leading-7 text-[color:var(--color-muted)] sm:text-base">
-              EventHub combines venue selection, decoration and food tiers, seat capacity logic, private/public access,
-              demo payments, and admin recovery workflows into one frontend ready for backend integration.
+              EventZen helps you discover the right setting, shape your event details, manage invitations, and keep everything
+              beautifully organized from the first idea to the final guest list.
             </p>
           </div>
 
           <div className="mt-8 flex flex-wrap gap-3">
             <Link to="/create" className="primary-button">
-              Create Event <ArrowRight className="ml-2 h-4 w-4" />
+              Start Planning <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
             <Link to="/events" className="secondary-button">
-              Browse Public Events
+              Explore Events
             </Link>
           </div>
 
@@ -35,17 +35,17 @@ export function HeroSection() {
             <div className="rounded-[1.5rem] border border-white/70 bg-white/70 p-4">
               <Sparkles className="h-5 w-5 text-[color:var(--color-gold-deep)]" />
               <p className="mt-4 font-display text-2xl">3</p>
-              <p className="text-sm text-[color:var(--color-muted)]">event types for MVP launch</p>
+              <p className="text-sm text-[color:var(--color-muted)]">celebration styles to explore</p>
             </div>
             <div className="rounded-[1.5rem] border border-white/70 bg-white/70 p-4">
               <MapPin className="h-5 w-5 text-[color:var(--color-gold-deep)]" />
               <p className="mt-4 font-display text-2xl">3</p>
-              <p className="text-sm text-[color:var(--color-muted)]">target cities pre-seeded</p>
+              <p className="text-sm text-[color:var(--color-muted)]">cities ready for your next event</p>
             </div>
             <div className="rounded-[1.5rem] border border-white/70 bg-white/70 p-4">
               <CalendarDays className="h-5 w-5 text-[color:var(--color-gold-deep)]" />
               <p className="mt-4 font-display text-2xl">24h</p>
-              <p className="text-sm text-[color:var(--color-muted)]">registration cutoff before event</p>
+              <p className="text-sm text-[color:var(--color-muted)]">recommended booking buffer before your event</p>
             </div>
           </div>
         </motion.div>

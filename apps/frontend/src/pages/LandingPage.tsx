@@ -6,11 +6,11 @@ import { VenueCard } from '../components/VenueCard'
 import { curatedVenues, galleryMoments } from '../data/content'
 
 const categories = [
-  { icon: HeartHandshake, title: 'Wedding events', text: 'Venue, decor tier, food tier, capacity, and invite flow in one pipeline.' },
-  { icon: PartyPopper, title: 'Private & public events', text: 'Support invite-only access codes or discoverable public registrations.' },
-  { icon: MapPinned, title: 'Availability-first booking', text: 'Only valid venue and vendor combinations should pass to booking.' },
-  { icon: UtensilsCrossed, title: 'Tiered vendors', text: 'Standard, Premium, and Plus pricing mapped into deterministic event costs.' },
-  { icon: BadgeIndianRupee, title: 'Demo payment ready', text: 'Paid events can move through a realistic internal payment simulation.' },
+  { icon: HeartHandshake, title: 'Wedding celebrations', text: 'Bring together venue, decor, dining, and guest planning in one elegant experience.' },
+  { icon: PartyPopper, title: 'Public or private moments', text: 'Host open celebrations or keep things intimate with invite-only access.' },
+  { icon: MapPinned, title: 'Confident booking choices', text: 'Explore combinations that feel practical, polished, and right for your occasion.' },
+  { icon: UtensilsCrossed, title: 'Curated vendor options', text: 'Compare catering and decor styles that match your vision and your budget.' },
+  { icon: BadgeIndianRupee, title: 'Clear cost planning', text: 'See estimated event costs early so there are fewer surprises later.' },
 ]
 
 export function LandingPage() {
@@ -20,8 +20,8 @@ export function LandingPage() {
 
       <section className="section-shell py-16">
         <div className="mb-8">
-          <span className="eyebrow">MVP Scope</span>
-          <h2 className="section-title max-w-3xl">The design you shared has been reshaped around the actual event-platform business model.</h2>
+          <span className="eyebrow">Why EventZen</span>
+          <h2 className="section-title max-w-3xl">Everything you need to plan a polished event, gathered into one graceful experience.</h2>
         </div>
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
           {categories.map((item) => (
@@ -37,11 +37,11 @@ export function LandingPage() {
       <section className="section-shell py-8">
         <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div>
-            <span className="eyebrow">Seeded Venues</span>
-            <h2 className="section-title">Three-city inventory for the first demo narrative</h2>
+            <span className="eyebrow">Featured Venues</span>
+            <h2 className="section-title">Beautiful spaces across three vibrant cities</h2>
           </div>
           <p className="max-w-2xl text-sm leading-7 text-[color:var(--color-muted)]">
-            The frontend now points toward city + event-type aware catalog endpoints so backend integration lands cleanly.
+            Discover venues chosen to suit weddings, celebrations, and memorable guest experiences across our featured destinations.
           </p>
         </div>
         <div className="grid gap-5 lg:grid-cols-3">
@@ -53,25 +53,25 @@ export function LandingPage() {
 
       <section className="section-shell py-16">
         <div className="mb-8">
-          <span className="eyebrow">Look & Feel</span>
-          <h2 className="section-title">The original invitation-style visual language is preserved, but the UX is now more product-oriented.</h2>
+          <span className="eyebrow">Inspiration</span>
+          <h2 className="section-title">A romantic, invitation-inspired experience designed to make planning feel joyful.</h2>
         </div>
         <GalleryGrid images={galleryMoments} />
       </section>
 
       <section className="section-shell py-8">
         <div className="paper-panel floral-corner px-6 py-10 text-center sm:px-10">
-          <span className="eyebrow">Execution Path</span>
-          <h2 className="section-title">Frontend is now positioned for backend integration instead of just static presentation.</h2>
+          <span className="eyebrow">Start Your Story</span>
+          <h2 className="section-title">Begin planning an event that feels seamless, special, and entirely your own.</h2>
           <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-[color:var(--color-muted)]">
-            Next phase is backend implementation against auth, catalog, events, registrations, demo payments, admin actions, and Brevo notifications.
+            From venue discovery to guest registration, EventZen helps you move from inspiration to celebration with ease.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link to="/create" className="primary-button">
-              Create an Event
+              Start Planning
             </Link>
             <Link to="/admin" className="secondary-button">
-              Open Admin Panel
+              View Operations
             </Link>
           </div>
         </div>

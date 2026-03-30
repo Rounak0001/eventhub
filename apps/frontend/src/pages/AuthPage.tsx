@@ -1,29 +1,30 @@
 import { useMutation } from '@tanstack/react-query'
 import { LoaderCircle } from 'lucide-react'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { authService } from '../api/services/auth'
 import { useSession } from '../providers/SessionProvider'
 
 export function AuthPage() {
   const navigate = useNavigate()
   const { login } = useSession()
-  const [mode, setMode] = useState<'login' | 'signup'>('signup')
   const [error, setError] = useState('')
   const [values, setValues] = useState({
-    fullName: '',
+    name: '',
     email: '',
     password: '',
   })
 
   const mutation = useMutation({
     mutationFn: async () =>
-      mode === 'signup'
-        ? authService.register(values)
-        : authService.login({ email: values.email, password: values.password }),
+      authService.register({
+        name: values.name,
+        email: values.email,
+        password: values.password,
+      }),
     onSuccess: (data) => {
       login(data.token, data.user)
-      navigate('/profile')
+      navigate(data.user.role === 'ADMIN' ? '/admin' : '/profile')
     },
     onError: (nextError: Error) => setError(nextError.message),
   })
@@ -34,10 +35,10 @@ export function AuthPage() {
         <div className="paper-panel floral-corner flex flex-col justify-between px-6 py-8 sm:px-8">
           <div>
             <span className="eyebrow">Welcome Suite</span>
-            <h1 className="display-title">A polished host login with invitation-grade styling.</h1>
+            <h1 className="display-title">Create your EventZen account with invitation-grade styling.</h1>
             <p className="mt-4 max-w-lg text-sm leading-7 text-[color:var(--color-muted)]">
-              Authentication posts only to `/api/auth/register` and `/api/auth/login`, then stores the JWT for profile,
-              dashboard, booking, and admin requests.
+              Create your account to start planning events, managing registrations, and unlocking the rest of the EventZen
+              experience through the gateway-backed auth flow.
             </p>
           </div>
           <div className="mt-10 grid gap-4">
@@ -49,34 +50,23 @@ export function AuthPage() {
           <div className="rounded-[2rem] border border-[color:var(--color-border)] bg-[linear-gradient(145deg,rgba(255,253,247,0.96),rgba(247,240,228,0.98))] p-[1px] shadow-[0_28px_70px_rgba(125,93,46,0.14)]">
             <div className="rounded-[calc(2rem-1px)] bg-[radial-gradient(circle_at_top,rgba(212,176,109,0.16),transparent_38%),linear-gradient(180deg,rgba(255,255,255,0.96),rgba(250,244,235,0.98))] px-6 py-8 text-[color:var(--color-ink)] sm:px-8">
               <div className="flex gap-3">
-                <button
-                  type="button"
-                  className={`rounded-full border px-5 py-2 text-sm transition ${
-                    mode === 'signup'
-                      ? 'border-[color:var(--color-gold-deep)] bg-[color:var(--color-gold-soft)] text-[color:var(--color-ink)] shadow-[0_10px_24px_rgba(198,149,123,0.18)]'
-                      : 'border-[color:var(--color-border)] bg-white text-[color:var(--color-muted)]'
-                  }`}
-                  onClick={() => setMode('signup')}
+                <NavLink
+                  to="/signup"
+                  className="rounded-full border border-[color:var(--color-gold-deep)] bg-[color:var(--color-gold-soft)] px-5 py-2 text-sm text-[color:var(--color-ink)] shadow-[0_10px_24px_rgba(198,149,123,0.18)]"
                 >
                   Sign up
-                </button>
-                <button
-                  type="button"
-                  className={`rounded-full border px-5 py-2 text-sm transition ${
-                    mode === 'login'
-                      ? 'border-[color:var(--color-gold-deep)] bg-[color:var(--color-gold-soft)] text-[color:var(--color-ink)] shadow-[0_10px_24px_rgba(198,149,123,0.18)]'
-                      : 'border-[color:var(--color-border)] bg-white text-[color:var(--color-muted)]'
-                  }`}
-                  onClick={() => setMode('login')}
+                </NavLink>
+                <NavLink
+                  to="/login"
+                  className="cursor-pointer rounded-full border border-[color:var(--color-border)] bg-white px-5 py-2 text-sm text-[color:var(--color-muted)] transition hover:text-[color:var(--color-ink)]"
                 >
                   Login
-                </button>
+                </NavLink>
               </div>
 
-              <h2 className="mt-8 font-display text-5xl text-[color:var(--color-ink)]">Welcome to EventZen</h2>
+              <h2 className="mt-8 font-display text-5xl text-[color:var(--color-ink)]">Create account</h2>
               <p className="mt-3 max-w-xl text-sm leading-7 text-[color:var(--color-muted)]">
-                Secure access for hosts, planners, and premium celebration teams with a cream, ivory, and gold palette that
-                matches the original EventZen visual language.
+                Create your EventZen account to start planning, hosting, and managing event experiences.
               </p>
 
               <form
@@ -87,14 +77,12 @@ export function AuthPage() {
                   mutation.mutate()
                 }}
               >
-                {mode === 'signup' ? (
-                  <input
-                    className="field border-[color:var(--color-border)] bg-white text-[color:var(--color-ink)] placeholder:text-[color:var(--color-muted)]"
-                    placeholder="Full name"
-                    value={values.fullName}
-                    onChange={(event) => setValues((current) => ({ ...current, fullName: event.target.value }))}
-                  />
-                ) : null}
+                <input
+                  className="field border-[color:var(--color-border)] bg-white text-[color:var(--color-ink)] placeholder:text-[color:var(--color-muted)]"
+                  placeholder="Full name"
+                  value={values.name}
+                  onChange={(event) => setValues((current) => ({ ...current, name: event.target.value }))}
+                />
 
                 <div className="grid gap-4 sm:grid-cols-2">
                   <input
@@ -117,7 +105,7 @@ export function AuthPage() {
 
                 <button type="submit" className="primary-button w-full" disabled={mutation.isPending}>
                   {mutation.isPending ? <LoaderCircle className="mr-2 h-4 w-4 animate-spin" /> : null}
-                  {mode === 'signup' ? 'Create account' : 'Sign in'}
+                  Create account
                 </button>
               </form>
             </div>

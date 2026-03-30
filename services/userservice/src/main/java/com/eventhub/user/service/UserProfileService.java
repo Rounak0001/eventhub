@@ -1,12 +1,12 @@
-package com.eventhub.user.service;
+package com.EventZen.user.service;
 
-import com.eventhub.user.dto.ProfileResponse;
-import com.eventhub.user.dto.ProfileSetupRequest;
-import com.eventhub.user.dto.UpdateProfileRequest;
-import com.eventhub.user.entity.User;
-import com.eventhub.user.entity.UserProfile;
-import com.eventhub.user.repository.UserProfileRepository;
-import com.eventhub.user.repository.UserRepository;
+import com.EventZen.user.dto.ProfileResponse;
+import com.EventZen.user.dto.ProfileSetupRequest;
+import com.EventZen.user.dto.UpdateProfileRequest;
+import com.EventZen.user.entity.User;
+import com.EventZen.user.entity.UserProfile;
+import com.EventZen.user.repository.UserProfileRepository;
+import com.EventZen.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -31,7 +31,6 @@ public class UserProfileService {
         profile.setUserId(user.getId());
         profile.setBio(request.getBio());
         profile.setAddress(request.getAddress());
-        profile.setPreferredEventType(request.getPreferredEventType());
 
         UserProfile savedProfile = userProfileRepository.save(profile);
         return mapToResponse(user, savedProfile);
@@ -78,9 +77,6 @@ public class UserProfileService {
         if (request.getAddress() != null) {
             profile.setAddress(request.getAddress());
         }
-        if (request.getPreferredEventType() != null) {
-            profile.setPreferredEventType(request.getPreferredEventType());
-        }
 
         UserProfile savedProfile = userProfileRepository.save(profile);
         return mapToResponse(savedUser, savedProfile);
@@ -97,8 +93,6 @@ public class UserProfileService {
                 user.getCity(),
                 user.getIsActive(),
                 profile != null ? profile.getBio() : null,
-                profile != null ? profile.getAddress() : null,
-                profile != null ? profile.getPreferredEventType() : null
-        );
+                profile != null ? profile.getAddress() : null);
     }
 }

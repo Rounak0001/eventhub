@@ -6,9 +6,9 @@ import { useSession } from '../providers/SessionProvider'
 export function ProfilePage() {
   const { token, user, setUser } = useSession()
   const profileQuery = useQuery({
-    queryKey: ['profile'],
-    queryFn: userService.profile,
-    enabled: Boolean(token),
+    queryKey: ['profile', user?.id],
+    queryFn: () => userService.getProfile(String(user?.id)),
+    enabled: Boolean(token && user?.id),
   })
 
   useEffect(() => {
@@ -19,12 +19,14 @@ export function ProfilePage() {
 
   const profile = profileQuery.data ?? user
 
-  if (!token) {
+  if (!token || !user) {
     return (
       <section className="section-shell py-10">
         <div className="paper-panel px-6 py-8">
-          <h1 className="section-title">Profile setup begins after sign in.</h1>
-          <p className="mt-3 text-sm text-[color:var(--color-muted)]">Use the auth page to store your JWT and unlock profile data from `/api/users/profile`.</p>
+          <h1 className="section-title">Sign in to view and manage your profile.</h1>
+          <p className="mt-3 text-sm text-[color:var(--color-muted)]">
+            Your profile helps keep your bookings, preferences, and event details all in one place.
+          </p>
         </div>
       </section>
     )
@@ -35,9 +37,9 @@ export function ProfilePage() {
       <div className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
         <div className="paper-panel floral-corner px-6 py-8">
           <p className="eyebrow">Host Profile</p>
-          <h1 className="section-title">{profile?.fullName ?? 'Event organizer'}</h1>
+          <h1 className="section-title">{profile?.name ?? 'Event organizer'}</h1>
           <p className="mt-3 text-sm leading-7 text-[color:var(--color-muted)]">
-            This screen is prepared for profile setup, organizer preferences, and city-based defaults that we will wire during backend integration.
+            Keep your personal details up to date so every event feels smooth, personal, and professionally managed.
           </p>
         </div>
 
@@ -49,15 +51,15 @@ export function ProfilePage() {
             </div>
             <div className="rounded-[1.5rem] bg-white/70 p-5">
               <p className="text-xs uppercase tracking-[0.28em] text-[color:var(--color-gold-deep)]">City</p>
-              <p className="mt-3 text-lg">{profile?.city ?? 'Kolkata'}</p>
+              <p className="mt-3 text-lg">{profile?.city ?? 'Not set'}</p>
             </div>
             <div className="rounded-[1.5rem] bg-white/70 p-5">
               <p className="text-xs uppercase tracking-[0.28em] text-[color:var(--color-gold-deep)]">Role</p>
-              <p className="mt-3 text-lg">{profile?.role ?? 'USER'}</p>
+              <p className="mt-3 text-lg">{profile?.role ?? 'CUSTOMER'}</p>
             </div>
             <div className="rounded-[1.5rem] bg-white/70 p-5">
               <p className="text-xs uppercase tracking-[0.28em] text-[color:var(--color-gold-deep)]">Phone</p>
-              <p className="mt-3 text-lg">{profile?.phone ?? '+91 9XXXXXXXXX'}</p>
+              <p className="mt-3 text-lg">{profile?.phone ?? 'Not set'}</p>
             </div>
           </div>
         </div>

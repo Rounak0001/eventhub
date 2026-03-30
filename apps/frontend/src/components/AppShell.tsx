@@ -26,8 +26,7 @@ export function AppShell() {
               <Sparkles className="h-5 w-5" />
             </div>
             <div>
-              <p className="font-display text-xl tracking-[0.18em] text-[color:var(--color-gold-deep)]">EVENTHUB</p>
-              <p className="text-xs uppercase tracking-[0.28em] text-[color:var(--color-muted)]">Venue • Vendors • Registrations</p>
+              <p className="font-display text-xl tracking-[0.18em] text-[color:var(--color-gold-deep)]">EventZen</p>
             </div>
           </Link>
 
@@ -46,9 +45,10 @@ export function AppShell() {
           </nav>
 
           <div className="hidden items-center gap-3 lg:flex">
-            <Link to="/auth" className="secondary-button">
+            <Link to="/login" className="secondary-button">
               Login
             </Link>
+           
             <Link to="/create" className="primary-button">
               Launch Event
             </Link>
@@ -78,8 +78,11 @@ export function AppShell() {
                 </NavLink>
               ))}
               <div className="gold-divider" />
-              <Link to="/auth" onClick={() => setOpen(false)} className="secondary-button">
+              <Link to="/login" onClick={() => setOpen(false)} className="secondary-button">
                 Login
+              </Link>
+              <Link to="/signup" onClick={() => setOpen(false)} className="secondary-button">
+                Sign up
               </Link>
               <Link to="/create" onClick={() => setOpen(false)} className="primary-button">
                 Launch Event

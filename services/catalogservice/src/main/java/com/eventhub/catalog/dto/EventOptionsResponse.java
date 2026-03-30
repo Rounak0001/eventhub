@@ -1,8 +1,8 @@
-package com.eventhub.catalog.dto;
+package com.EventZen.catalog.dto;
 
-import com.eventhub.catalog.entity.DecorationVendor;
-import com.eventhub.catalog.entity.FoodVendor;
-import com.eventhub.catalog.entity.Venue;
+import com.EventZen.catalog.entity.DecorationVendor;
+import com.EventZen.catalog.entity.FoodVendor;
+import com.EventZen.catalog.entity.Venue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

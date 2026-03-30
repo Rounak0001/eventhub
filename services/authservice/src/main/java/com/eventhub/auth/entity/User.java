@@ -1,6 +1,6 @@
-package com.eventhub.auth.entity;
+package com.EventZen.auth.entity;
 
-import com.eventhub.auth.enums.UserRole;
+import com.EventZen.auth.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,14 +30,14 @@ public class User {
     @Column(nullable = false, length = 20)
     private UserRole role;
 
-    @Column(length = 20)
-    private String phone;
+    // @Column(length = 20, nullable = true)
+    // private String phone;
 
-    @Column(name = "avatar_url", length = 500)
-    private String avatarUrl;
+    // @Column(name = "avatar_url", length = 500)
+    // private String avatarUrl;
 
-    @Column(length = 100)
-    private String city;
+    // @Column(length = 100, nullable = true)
+    // private String city;
 
     @Column(name = "is_active", nullable = false)
     private Boolean isActive = true;

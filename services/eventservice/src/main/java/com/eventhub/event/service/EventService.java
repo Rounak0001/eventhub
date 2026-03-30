@@ -1,14 +1,14 @@
-package com.eventhub.event.service;
+package com.EventZen.event.service;
 
-import com.eventhub.event.dto.CancelEventRequest;
-import com.eventhub.event.dto.CreateEventRequest;
-import com.eventhub.event.dto.EventResponse;
-import com.eventhub.event.dto.RescheduleEventRequest;
-import com.eventhub.event.entity.*;
-import com.eventhub.event.enums.EventStatus;
-import com.eventhub.event.enums.TicketType;
-import com.eventhub.event.enums.VisibilityType;
-import com.eventhub.event.repository.*;
+import com.EventZen.event.dto.CancelEventRequest;
+import com.EventZen.event.dto.CreateEventRequest;
+import com.EventZen.event.dto.EventResponse;
+import com.EventZen.event.dto.RescheduleEventRequest;
+import com.EventZen.event.entity.*;
+import com.EventZen.event.enums.EventStatus;
+import com.EventZen.event.enums.TicketType;
+import com.EventZen.event.enums.VisibilityType;
+import com.EventZen.event.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -60,10 +60,12 @@ public class EventService {
         int foodGuestCount;
         if (request.getVisibility() == VisibilityType.PRIVATE) {
             if (request.getExpectedGuests() == null || request.getExpectedGuests() <= 0) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Expected guests are required for private events");
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                        "Expected guests are required for private events");
             }
             if (request.getExpectedGuests() > request.getSeatCapacity()) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Expected guests cannot exceed seat capacity");
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                        "Expected guests cannot exceed seat capacity");
             }
             if (request.getAccessCode() == null || request.getAccessCode().isBlank()) {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Access code is required for private events");
@@ -75,7 +77,8 @@ public class EventService {
 
         if (request.getTicketType() == TicketType.PAID) {
             if (request.getTicketPrice() == null || request.getTicketPrice().compareTo(BigDecimal.ZERO) <= 0) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Ticket price must be greater than 0 for paid events");
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                        "Ticket price must be greater than 0 for paid events");
             }
         } else {
             request.setTicketPrice(BigDecimal.ZERO);
@@ -179,8 +182,7 @@ public class EventService {
             CreateEventRequest request,
             Venue venue,
             DecorationVendor decorationVendor,
-            FoodVendor foodVendor
-    ) {
+            FoodVendor foodVendor) {
         if (!"ACTIVE".equalsIgnoreCase(venue.getStatus())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Selected venue is not active");
         }
@@ -191,16 +193,22 @@ public class EventService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Selected food vendor is not active");
         }
 
-        if (!venue.getCityId().equals(request.getCityId()) || !venue.getEventTypeId().equals(request.getEventTypeId())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Venue does not belong to selected city/event type");
+        if (!venue.getCityId().equals(request.getCityId())
+                || !venue.getEventTypeId().equals(request.getEventTypeId())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Venue does not belong to selected city/event type");
         }
 
-        if (!decorationVendor.getCityId().equals(request.getCityId()) || !decorationVendor.getEventTypeId().equals(request.getEventTypeId())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Decoration vendor does not belong to selected city/event type");
+        if (!decorationVendor.getCityId().equals(request.getCityId())
+                || !decorationVendor.getEventTypeId().equals(request.getEventTypeId())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Decoration vendor does not belong to selected city/event type");
         }
 
-        if (!foodVendor.getCityId().equals(request.getCityId()) || !foodVendor.getEventTypeId().equals(request.getEventTypeId())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Food vendor does not belong to selected city/event type");
+        if (!foodVendor.getCityId().equals(request.getCityId())
+                || !foodVendor.getEventTypeId().equals(request.getEventTypeId())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Food vendor does not belong to selected city/event type");
         }
     }
 
@@ -231,7 +239,6 @@ public class EventService {
                 event.getPlatformFee(),
                 event.getTotalCost(),
                 event.getStatus(),
-                event.getRegistrationDeadline()
-        );
+                event.getRegistrationDeadline());
     }
 }

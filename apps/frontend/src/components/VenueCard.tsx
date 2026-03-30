@@ -12,7 +12,7 @@ export function VenueCard({ venue, selected, onSelect }: VenueCardProps) {
   return (
     <button type="button" onClick={onSelect} className={`paper-panel group text-left transition ${selected ? 'ring-2 ring-[color:var(--color-gold)]' : ''}`}>
       <div className="overflow-hidden rounded-[1.65rem]">
-        <img src={venue.image ?? '/img1.webp'} alt={venue.name} className="h-60 w-full object-cover transition duration-700 group-hover:scale-105" />
+        <img src={venue.image ?? './public/img1.webp'} alt={venue.name} className="h-60 w-full object-cover transition duration-700 group-hover:scale-105" />
       </div>
       <div className="space-y-4 px-5 py-5">
         <div>

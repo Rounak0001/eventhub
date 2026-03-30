@@ -68,11 +68,11 @@ export function StepperForm({
 
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-between">
           <button type="button" onClick={onBack} className="secondary-button border-white/15 bg-white/8 text-white disabled:cursor-not-allowed disabled:opacity-40" disabled={!canGoBack}>
-            <ArrowLeft className="mr-2 h-4 w-4" /> Previous
+            <ArrowLeft className="mr-2 h-4 w-4" /> Back
           </button>
           <button type="button" onClick={onNext} className="primary-button">
             {loading ? <LoaderCircle className="mr-2 h-4 w-4 animate-spin" /> : null}
-            {isLastStep ? 'Publish Event' : 'Continue'} {!isLastStep ? <ArrowRight className="ml-2 h-4 w-4" /> : null}
+            {isLastStep ? 'Publish My Event' : 'Continue'} {!isLastStep ? <ArrowRight className="ml-2 h-4 w-4" /> : null}
           </button>
         </div>
       </div>

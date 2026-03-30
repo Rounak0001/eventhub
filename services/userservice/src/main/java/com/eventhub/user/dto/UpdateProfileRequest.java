@@ -1,4 +1,4 @@
-package com.eventhub.user.dto;
+package com.EventZen.user.dto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -14,5 +14,4 @@ public class UpdateProfileRequest {
 
     private String bio;
     private String address;
-    private String preferredEventType;
 }

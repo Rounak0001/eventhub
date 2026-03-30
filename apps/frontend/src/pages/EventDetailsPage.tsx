@@ -5,15 +5,19 @@ import { InvitationCard } from '../components/InvitationCard'
 import { showcaseEvents } from '../data/content'
 import { formatCurrency, formatDate } from '../utils/format'
 
+function isNumericId(value: string) {
+  return /^\d+$/.test(value)
+}
+
 export function EventDetailsPage() {
   const { eventId = '' } = useParams()
   const detailsQuery = useQuery({
     queryKey: ['event', eventId],
     queryFn: () => eventService.details(eventId),
-    enabled: Boolean(eventId),
+    enabled: isNumericId(eventId),
   })
 
-  const event = detailsQuery.data ?? showcaseEvents.find((item) => item.id === eventId) ?? showcaseEvents[0]
+  const event = detailsQuery.data ?? showcaseEvents.find((item) => String(item.id) === eventId) ?? showcaseEvents[0]
   const seatsLeft = (event.seatCapacity ?? event.guestCount ?? 0) - (event.bookedSeats ?? 0)
 
   return (
@@ -45,14 +49,14 @@ export function EventDetailsPage() {
         <div className="paper-panel px-6 py-8">
           <h2 className="font-display text-3xl">Guest registration path</h2>
           <p className="mt-4 text-sm leading-7 text-[color:var(--color-muted)]">
-            Participants move into a registration flow that will enforce private/public access, capacity constraints, and the 24-hour cutoff rule.
+            Participants move into a registration flow that enforces access, capacity, and payment processing through the gateway.
           </p>
           <div className="mt-8 grid gap-4 md:grid-cols-2">
             <Link to={`/events/${event.id}/register`} className="primary-button text-center">
               Register Attendance
             </Link>
             <Link to="/payment" className="secondary-button text-center">
-              Open Demo Payment
+              Open Payment
             </Link>
           </div>
           <img src={event.heroImage ?? '/img1.webp'} alt={event.title} className="mt-8 h-80 w-full rounded-[1.8rem] object-cover" />

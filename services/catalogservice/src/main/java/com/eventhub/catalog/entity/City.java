@@ -1,4 +1,4 @@
-package com.eventhub.catalog.entity;
+package com.EventZen.catalog.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
