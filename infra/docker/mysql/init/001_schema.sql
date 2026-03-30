@@ -20,8 +20,6 @@ CREATE TABLE IF NOT EXISTS user_profiles (
   user_id BIGINT NOT NULL UNIQUE,
   bio TEXT,
   address VARCHAR(255),
-  company_name VARCHAR(150),
-  preferred_event_type VARCHAR(50),
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   CONSTRAINT fk_user_profiles_user FOREIGN KEY (user_id) REFERENCES users(id)

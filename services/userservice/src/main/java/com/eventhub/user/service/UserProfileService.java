@@ -31,7 +31,6 @@ public class UserProfileService {
         profile.setUserId(user.getId());
         profile.setBio(request.getBio());
         profile.setAddress(request.getAddress());
-        profile.setCompanyName(request.getCompanyName());
         profile.setPreferredEventType(request.getPreferredEventType());
 
         UserProfile savedProfile = userProfileRepository.save(profile);
@@ -42,9 +41,7 @@ public class UserProfileService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
 
-        UserProfile profile = userProfileRepository.findByUserId(userId)
-                .orElse(null);
-
+        UserProfile profile = userProfileRepository.findByUserId(userId).orElse(null);
         return mapToResponse(user, profile);
     }
 
@@ -81,9 +78,6 @@ public class UserProfileService {
         if (request.getAddress() != null) {
             profile.setAddress(request.getAddress());
         }
-        if (request.getCompanyName() != null) {
-            profile.setCompanyName(request.getCompanyName());
-        }
         if (request.getPreferredEventType() != null) {
             profile.setPreferredEventType(request.getPreferredEventType());
         }
@@ -104,7 +98,6 @@ public class UserProfileService {
                 user.getIsActive(),
                 profile != null ? profile.getBio() : null,
                 profile != null ? profile.getAddress() : null,
-                profile != null ? profile.getCompanyName() : null,
                 profile != null ? profile.getPreferredEventType() : null
         );
     }

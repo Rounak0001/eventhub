@@ -25,9 +25,6 @@ public class UserProfile {
     @Column(columnDefinition = "TEXT")
     private String address;
 
-    @Column(name = "company_name", length = 150)
-    private String companyName;
-
     @Column(name = "preferred_event_type", length = 100)
     private String preferredEventType;
 

@@ -14,6 +14,5 @@ public class UpdateProfileRequest {
 
     private String bio;
     private String address;
-    private String companyName;
     private String preferredEventType;
 }
